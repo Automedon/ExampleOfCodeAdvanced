@@ -26,6 +26,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   if (!queryClientRef.current) {
     queryClientRef.current = new QueryClient();
   }
+
   return (
     <RecoilRoot>
       <QueryClientProvider client={queryClientRef.current}>
