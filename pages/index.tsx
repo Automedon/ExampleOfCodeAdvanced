@@ -10,6 +10,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Link href={"/about"}>About Page</Link>
+      <Link href={"/tablepage"}>Table Page</Link>
     </div>
   );
 }

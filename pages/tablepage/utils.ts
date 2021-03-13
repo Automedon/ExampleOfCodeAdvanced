@@ -1,0 +1,15 @@
+export const hiddenColumns = [
+  "forms",
+  "is_default",
+  "location_area_encounters",
+  "order",
+  "game_indices",
+  "past_types",
+  "species",
+  "types",
+  "held_items",
+  "moves",
+  "sprites",
+  "stats",
+  "abilities",
+];

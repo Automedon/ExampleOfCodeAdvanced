@@ -1,10 +1,17 @@
 import React from "react";
 import Head from "next/head";
-import { useTable } from "react-table";
+import {
+  useTable,
+  useSortBy,
+  useAsyncDebounce,
+  useFilters,
+  useGlobalFilter,
+} from "react-table";
 import { QueryClient, useQuery } from "react-query";
 import { dehydrate } from "react-query/hydration";
 import { getPokemonsz } from "./api";
 import { Pokemon } from "./types";
+import { hiddenColumns } from "./utils";
 
 export default function Index() {
   const { data: pokemonszData, isLoading } = useQuery<Pokemon[], Error>(
@@ -13,11 +20,13 @@ export default function Index() {
   );
   const data = React.useMemo(
     () =>
-      pokemonszData?.map(({ name, base_experience, height, ...pok }) => {
+      pokemonszData?.map(({ name, base_experience, height, id, weight }) => {
         return {
           name,
           base_experience,
           height,
+          id,
+          weight,
         };
       }) || [],
     [pokemonszData]
@@ -41,7 +50,7 @@ export default function Index() {
     headerGroups,
     rows,
     prepareRow,
-  } = useTable({ columns, data });
+  } = useTable({ columns, data, initialState: { hiddenColumns } }, useSortBy);
   const loading = isLoading && <div>Loading...</div>;
 
   return (
@@ -57,7 +66,7 @@ export default function Index() {
             <tr {...headerGroup.getHeaderGroupProps()}>
               {headerGroup.headers.map((column: any) => (
                 <th
-                  {...column.getHeaderProps()}
+                  {...column.getHeaderProps(column.getSortByToggleProps())}
                   style={{
                     borderBottom: "solid 3px red",
                     background: "aliceblue",
@@ -66,6 +75,14 @@ export default function Index() {
                   }}
                 >
                   {column.render("Header")}
+                  {/* Add a sort direction indicator */}
+                  <span>
+                    {column.isSorted
+                      ? column.isSortedDesc
+                        ? " 🔽"
+                        : " 🔼"
+                      : ""}
+                  </span>
                 </th>
               ))}
             </tr>
