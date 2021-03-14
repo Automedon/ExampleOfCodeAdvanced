@@ -316,3 +316,15 @@ export interface Pokemon {
   types: Type[];
   weight: number;
 }
+
+export interface Result {
+  name: string;
+  url: string;
+}
+
+export interface AxiosPokemonRequest {
+  count: number;
+  next: string;
+  previous?: any;
+  results: Result[];
+}
