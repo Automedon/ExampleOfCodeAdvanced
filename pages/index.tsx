@@ -11,6 +11,7 @@ export default function Home() {
       </Head>
       <Link href={"/about"}>About Page</Link>
       <Link href={"/tablepage"}>Table Page</Link>
+      <Link href={"/select"}>Select Page</Link>
     </div>
   );
 }
