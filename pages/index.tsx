@@ -9,7 +9,7 @@ export default function Home() {
         <title>Create Next App</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Link href={"/about"}>About Page</Link>
+      <Link href={"/about"}>About Pagee</Link>
       <Link href={"/tablepage"}>Table Page</Link>
       <Link href={"/select"}>Select Page</Link>
     </div>
