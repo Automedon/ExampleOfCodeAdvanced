@@ -13,6 +13,8 @@ export default function Home() {
       <Link href={"/tablepage"}>Table Page</Link>
       <Link href={"/select"}>Select Page</Link>
       <Link href={"/tablesub"}>Table sub</Link>
+      <Link href={"/materialTable"}>Material Table</Link>
+      <Link href={"/antdTable"}>Antd Table</Link>
     </div>
   );
 }
