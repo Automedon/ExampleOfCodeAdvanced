@@ -1,8 +1,34 @@
 import React from "react";
-import { useTable, useExpanded } from "react-table";
+import {
+  useTable,
+  useExpanded,
+  useFilters,
+  Row,
+  useFlexLayout,
+  useGlobalFilter,
+  useAsyncDebounce,
+} from "react-table";
+
 import { Border } from "./style";
 
 const Table = ({ columns, data }) => {
+  const globalFilter = React.useCallback(
+    (rows: Row[], columnIds: any, searchQuery: string) => {
+      if (!searchQuery) return rows;
+
+      const lowercaseQuery = searchQuery.toLowerCase();
+      const rowMatches = (row): boolean =>
+        Object.values(row.values).some(
+          (rowValue) =>
+            typeof rowValue === "string" &&
+            rowValue.toLowerCase().includes(lowercaseQuery)
+        ) || row.subRows?.some(rowMatches);
+      console.log(rows.filter(rowMatches));
+      return rows.filter(rowMatches);
+    },
+    []
+  );
+
   const {
     getTableProps,
     getTableBodyProps,
@@ -10,10 +36,42 @@ const Table = ({ columns, data }) => {
     rows,
     prepareRow,
     visibleColumns,
-  } = useTable({ columns, data }, useExpanded);
-
+    preGlobalFilteredRows,
+    setGlobalFilter,
+    state,
+    toggleRowExpanded,
+    getToggleAllRowsExpandedProps,
+  } = useTable(
+    {
+      columns,
+      data,
+      globalFilter,
+      getSubRows: (row: any) => row.subRows,
+      // manualFilters: true,
+    },
+    //useFilters,
+    useGlobalFilter,
+    useExpanded,
+    useFlexLayout
+  );
   return (
     <Border>
+      <button
+        onClick={() => {
+          toggleRowExpanded("0");
+          toggleRowExpanded("0.0");
+        }}
+      >
+        Taggle
+      </button>
+      <button
+        onClick={() => {
+          getToggleAllRowsExpandedProps();
+        }}
+      >
+        Taggle2
+      </button>
+
       <table {...getTableProps()}>
         <thead>
           {
@@ -37,26 +95,27 @@ const Table = ({ columns, data }) => {
             ))
           }
         </thead>
+        <GlobalFilter
+          globalFilter={state.globalFilter}
+          setGlobalFilter={setGlobalFilter}
+          preGlobalFilteredRows={preGlobalFilteredRows}
+        />
         <tbody {...getTableBodyProps()}>
           {
             // Loop over the table rows
             rows.map((row) => {
               // Prepare the row for display
               prepareRow(row);
-              console.log(row.cells);
+
               if (row.canExpand) {
                 return (
                   <tr {...row.getRowProps()}>
-                    {row.cells.slice(0, 1).map((cell) => {
-                      return (
-                        <td
-                          {...cell.getCellProps()}
-                          colSpan={visibleColumns.length}
-                        >
-                          {cell.render("Cell")}
-                        </td>
-                      );
-                    })}
+                    <td
+                      colSpan={visibleColumns.length}
+                      {...row.getToggleRowExpandedProps()}
+                    >
+                      Expand {row.original.swim1}
+                    </td>
                   </tr>
                 );
               }
@@ -76,5 +135,35 @@ const Table = ({ columns, data }) => {
     </Border>
   );
 };
+
+function GlobalFilter({
+  preGlobalFilteredRows,
+  globalFilter,
+  setGlobalFilter,
+}) {
+  const count = preGlobalFilteredRows.length;
+  const [value, setValue] = React.useState(globalFilter);
+  const onChange = (value) => {
+    setGlobalFilter(value || undefined);
+  };
+
+  return (
+    <span>
+      Search:{" "}
+      <input
+        value={value || ""}
+        onChange={(e) => {
+          setValue(e.target.value);
+          onChange(e.target.value);
+        }}
+        placeholder={`${count} records...`}
+        style={{
+          fontSize: "1.1rem",
+          border: "0",
+        }}
+      />
+    </span>
+  );
+}
 
 export { Table };

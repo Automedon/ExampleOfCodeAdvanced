@@ -1,0 +1,33 @@
+.layoutRoot {
+    display: flex;
+    background: #eee;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+.absoluteLayout {
+    height: 600px;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+}
+.scaledLayout {
+    width: 125%;
+    left: -12.5%;
+    transform: scale(0.75);
+    margin-top: -7.5%;
+}
+
+.box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background: #ccc;
+    border: 1px solid black;
+    text-align: center;
+    padding: 10px;
+    box-sizing: border-box;
+    overflow: hidden;
+    position: relative;
+    margin: 20px;
+}

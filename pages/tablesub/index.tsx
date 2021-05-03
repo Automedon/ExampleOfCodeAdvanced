@@ -8,11 +8,27 @@ const TableSub = () => {
         swim1: "Hello",
         subRows: [
           {
-            swim2: "World",
+            swim1: "World",
             subRows: [
               {
                 col1: "Rock",
                 col2: "Solid",
+                subRows: [],
+              },
+            ],
+          },
+        ],
+      },
+      {
+        swim1: "HelMega",
+        subRows: [
+          {
+            swim1: "WorMega",
+            subRows: [
+              {
+                col1: "RockMega",
+                col2: "SolidMega",
+                subRows: [],
               },
             ],
           },
@@ -26,7 +42,12 @@ const TableSub = () => {
       {
         Header: "Swim 1",
         id: "swim1",
-        accessor: "swim1", // accessor is the "key" in the data
+        width: 250,
+        accessor: "swim1", // accessor is the "key" in the data,
+        Filter: (...props) => {
+          console.log(props);
+          return <div>Filter</div>;
+        },
         Cell: ({ row }) => {
           // Use Cell to render an expander for each row.
           // We can use the getToggleRowExpandedProps prop-getter
@@ -56,11 +77,17 @@ const TableSub = () => {
       },
       {
         Header: "Column 1",
+        width: 250,
         accessor: "col1", // accessor is the "key" in the data
+        Filter: () => null,
+        disableGlobalFilter: true,
       },
       {
         Header: "Column 2",
         accessor: "col2",
+        width: 250,
+        Filter: () => <div>Hello</div>,
+        disableGlobalFilter: true,
       },
     ],
     []
