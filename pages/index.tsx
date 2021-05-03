@@ -15,6 +15,9 @@ export default function Home() {
       <Link href={"/tablesub"}>Table sub</Link>
       <Link href={"/materialTable"}>Material Table</Link>
       <Link href={"/antdTable"}>Antd Table</Link>
+      <Link href={"/tableSuit"}>Suit Table</Link>
+      <Link href={"/devTable"}>Dev Table</Link>
+      <Link href={"/primeTable"}>Prime Table</Link>
     </div>
   );
 }

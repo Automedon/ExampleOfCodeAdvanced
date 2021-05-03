@@ -73,7 +73,7 @@ const Material = () => {
               surname: "Baran",
               birthYear: 1987,
               birthCity: 34,
-              sex: "Female",
+              sex: "Male",
               type: "child",
               parentId: 3,
             },
@@ -117,10 +117,7 @@ const Material = () => {
 
 const StyledRow = styled(MTableBodyRow)<{
   $changeBackground?: boolean;
-}>`
-  background-color: ${({ $changeBackground }) =>
-    $changeBackground ? "red" : "green"};
-`;
+}>``;
 
 const StyledTable = styled.div<{}>`
   width: 1200px;

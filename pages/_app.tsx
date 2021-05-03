@@ -1,5 +1,9 @@
 import React from "react";
 import { RecoilRoot } from "recoil";
+import "primereact/resources/themes/saga-blue/theme.css";
+import "primereact/resources/primereact.min.css";
+import "primeicons/primeicons.css";
+import "primeflex/primeflex.css";
 import "antd/dist/antd.css";
 import "../styles/globals.css";
 import { QueryClient, QueryClientProvider } from "react-query";

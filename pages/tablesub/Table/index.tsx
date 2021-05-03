@@ -58,8 +58,8 @@ const Table = ({ columns, data }) => {
     <Border>
       <button
         onClick={() => {
-          toggleRowExpanded("0");
-          toggleRowExpanded("0.0");
+          toggleRowExpanded(["0"]);
+          toggleRowExpanded(["0.0"]);
         }}
       >
         Taggle
