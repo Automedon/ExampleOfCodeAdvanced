@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "format": "prettier --write .",
-    "lint": "eslint . && prettier --check ."
+    "lint": "eslint . && prettier --check .",
+    "test": "jest"
   },
   "dependencies": {
     "@devexpress/dx-react-core": "^2.7.5",
