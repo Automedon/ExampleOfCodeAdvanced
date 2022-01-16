@@ -18,6 +18,7 @@ export default function Home() {
       <Link href={"/tableSuit"}>Suit Table</Link>
       <Link href={"/devTable"}>Dev Table</Link>
       <Link href={"/primeTable"}>Prime Table</Link>
+      <Link href={"/ReactDataGrid"}>ReactDataGrid</Link>
     </div>
   );
 }

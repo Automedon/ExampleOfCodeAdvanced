@@ -24,7 +24,7 @@ const TreeTableFilterDemo = () => {
           <i className="pi pi-search" />
           <InputText
             type="search"
-            onInput={(e) =>
+            onInput={(e: any) =>
               treeTableFuncMap[`${globalFilterKey}`](e.target.value)
             }
             placeholder="Global Search"
